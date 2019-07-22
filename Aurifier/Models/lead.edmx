@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AuriferLeadsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lastname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ConfirmPassword" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LeadsTable">
+          <Key>
+            <PropertyRef Name="Lead_Id" />
+          </Key>
+          <Property Name="Lead_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeadName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Company" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mail_Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GeneratedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Team_Id" Type="int" Nullable="false" />
+          <Property Name="Manager" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RolesId" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Descreption" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="EmpId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="MobileNumber" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ConfirmPassword" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Roles_Id" Type="int" Nullable="false" />
+          <Property Name="TeamId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Roles_Id" />
+          </Key>
+          <Property Name="Roles_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Roles_Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeamsTable">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamNumber" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_LeadsTable_EmployeeId_Registration_EmployeeId">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="1" />
+          <End Role="LeadsTable" Type="Self.LeadsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="LeadsTable">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeadsTable_RolesId_Roles_Roles_Id">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="LeadsTable" Type="Self.LeadsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Roles_Id" />
+            </Principal>
+            <Dependent Role="LeadsTable">
+              <PropertyRef Name="RolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeadsTable_Team_Id_TeamsTable_TeamId">
+          <End Role="TeamsTable" Type="Self.TeamsTable" Multiplicity="1" />
+          <End Role="LeadsTable" Type="Self.LeadsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamsTable">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="LeadsTable">
+              <PropertyRef Name="Team_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Roles_Id_Roles_Roles_Id">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Registration" Type="Self.Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Roles_Id" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="Roles_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_TeamId_TeamsTable_TeamId">
+          <End Role="TeamsTable" Type="Self.TeamsTable" Multiplicity="1" />
+          <End Role="Registration" Type="Self.Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamsTable">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AuriferLeadsModelStoreContainer">
+          <EntitySet Name="AdminLogin" EntityType="Self.AdminLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeadsTable" EntityType="Self.LeadsTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeamsTable" EntityType="Self.TeamsTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_LeadsTable_EmployeeId_Registration_EmployeeId" Association="Self.FK_LeadsTable_EmployeeId_Registration_EmployeeId">
+            <End Role="Registration" EntitySet="Registration" />
+            <End Role="LeadsTable" EntitySet="LeadsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeadsTable_RolesId_Roles_Roles_Id" Association="Self.FK_LeadsTable_RolesId_Roles_Roles_Id">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="LeadsTable" EntitySet="LeadsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeadsTable_Team_Id_TeamsTable_TeamId" Association="Self.FK_LeadsTable_Team_Id_TeamsTable_TeamId">
+            <End Role="TeamsTable" EntitySet="TeamsTable" />
+            <End Role="LeadsTable" EntitySet="LeadsTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Roles_Id_Roles_Roles_Id" Association="Self.FK_Registration_Roles_Id_Roles_Roles_Id">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Registration" EntitySet="Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_TeamId_TeamsTable_TeamId" Association="Self.FK_Registration_TeamId_TeamsTable_TeamId">
+            <End Role="TeamsTable" EntitySet="TeamsTable" />
+            <End Role="Registration" EntitySet="Registration" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AuriferLeadsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdminLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LeadsTable">
+          <Key>
+            <PropertyRef Name="Lead_Id" />
+          </Key>
+          <Property Name="Lead_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeadName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mail_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GeneratedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Team_Id" Type="Int32" Nullable="false" />
+          <Property Name="Manager" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RolesId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Descreption" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Registration" Relationship="Self.FK_LeadsTable_EmployeeId_Registration_EmployeeId" FromRole="LeadsTable" ToRole="Registration" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_LeadsTable_RolesId_Roles_Roles_Id" FromRole="LeadsTable" ToRole="Roles" />
+          <NavigationProperty Name="TeamsTable" Relationship="Self.FK_LeadsTable_Team_Id_TeamsTable_TeamId" FromRole="LeadsTable" ToRole="TeamsTable" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="EmpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConfirmPassword" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Roles_Id" Type="Int32" Nullable="false" />
+          <Property Name="TeamId" Type="Int32" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LeadsTables" Relationship="Self.FK_LeadsTable_EmployeeId_Registration_EmployeeId" FromRole="Registration" ToRole="LeadsTable" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Registration_Roles_Id_Roles_Roles_Id" FromRole="Registration" ToRole="Roles" />
+          <NavigationProperty Name="TeamsTable" Relationship="Self.FK_Registration_TeamId_TeamsTable_TeamId" FromRole="Registration" ToRole="TeamsTable" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Roles_Id" />
+          </Key>
+          <Property Name="Roles_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Roles_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LeadsTables" Relationship="Self.FK_LeadsTable_RolesId_Roles_Roles_Id" FromRole="Roles" ToRole="LeadsTable" />
+          <NavigationProperty Name="Registrations" Relationship="Self.FK_Registration_Roles_Id_Roles_Roles_Id" FromRole="Roles" ToRole="Registration" />
+        </EntityType>
+        <EntityType Name="TeamsTable">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LeadsTables" Relationship="Self.FK_LeadsTable_Team_Id_TeamsTable_TeamId" FromRole="TeamsTable" ToRole="LeadsTable" />
+          <NavigationProperty Name="Registrations" Relationship="Self.FK_Registration_TeamId_TeamsTable_TeamId" FromRole="TeamsTable" ToRole="Registration" />
+        </EntityType>
+        <Association Name="FK_LeadsTable_EmployeeId_Registration_EmployeeId">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="1" />
+          <End Role="LeadsTable" Type="Self.LeadsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="EmpId" />
+            </Principal>
+            <Dependent Role="LeadsTable">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeadsTable_RolesId_Roles_Roles_Id">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="LeadsTable" Type="Self.LeadsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Roles_Id" />
+            </Principal>
+            <Dependent Role="LeadsTable">
+              <PropertyRef Name="RolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeadsTable_Team_Id_TeamsTable_TeamId">
+          <End Role="TeamsTable" Type="Self.TeamsTable" Multiplicity="1" />
+          <End Role="LeadsTable" Type="Self.LeadsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamsTable">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="LeadsTable">
+              <PropertyRef Name="Team_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Roles_Id_Roles_Roles_Id">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="Registration" Type="Self.Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Roles_Id" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="Roles_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_TeamId_TeamsTable_TeamId">
+          <End Role="TeamsTable" Type="Self.TeamsTable" Multiplicity="1" />
+          <End Role="Registration" Type="Self.Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamsTable">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AuriferLeadsEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminLogins" EntityType="Self.AdminLogin" />
+          <EntitySet Name="LeadsTables" EntityType="Self.LeadsTable" />
+          <EntitySet Name="Registrations" EntityType="Self.Registration" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="TeamsTables" EntityType="Self.TeamsTable" />
+          <AssociationSet Name="FK_LeadsTable_EmployeeId_Registration_EmployeeId" Association="Self.FK_LeadsTable_EmployeeId_Registration_EmployeeId">
+            <End Role="Registration" EntitySet="Registrations" />
+            <End Role="LeadsTable" EntitySet="LeadsTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeadsTable_RolesId_Roles_Roles_Id" Association="Self.FK_LeadsTable_RolesId_Roles_Roles_Id">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="LeadsTable" EntitySet="LeadsTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeadsTable_Team_Id_TeamsTable_TeamId" Association="Self.FK_LeadsTable_Team_Id_TeamsTable_TeamId">
+            <End Role="TeamsTable" EntitySet="TeamsTables" />
+            <End Role="LeadsTable" EntitySet="LeadsTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Roles_Id_Roles_Roles_Id" Association="Self.FK_Registration_Roles_Id_Roles_Roles_Id">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Registration" EntitySet="Registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_TeamId_TeamsTable_TeamId" Association="Self.FK_Registration_TeamId_TeamsTable_TeamId">
+            <End Role="TeamsTable" EntitySet="TeamsTables" />
+            <End Role="Registration" EntitySet="Registrations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AuriferLeadsModelStoreContainer" CdmEntityContainer="AuriferLeadsEntities3">
+          <EntitySetMapping Name="AdminLogins">
+            <EntityTypeMapping TypeName="AuriferLeadsModel.AdminLogin">
+              <MappingFragment StoreEntitySet="AdminLogin">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeadsTables">
+            <EntityTypeMapping TypeName="AuriferLeadsModel.LeadsTable">
+              <MappingFragment StoreEntitySet="LeadsTable">
+                <ScalarProperty Name="Lead_Id" ColumnName="Lead_Id" />
+                <ScalarProperty Name="LeadName" ColumnName="LeadName" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Mail_Id" ColumnName="Mail_Id" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="GeneratedBy" ColumnName="GeneratedBy" />
+                <ScalarProperty Name="Team_Id" ColumnName="Team_Id" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="RolesId" ColumnName="RolesId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Descreption" ColumnName="Descreption" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registrations">
+            <EntityTypeMapping TypeName="AuriferLeadsModel.Registration">
+              <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+                <ScalarProperty Name="Roles_Id" ColumnName="Roles_Id" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="AuriferLeadsModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Roles_Id" ColumnName="Roles_Id" />
+                <ScalarProperty Name="Roles_Name" ColumnName="Roles_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamsTables">
+            <EntityTypeMapping TypeName="AuriferLeadsModel.TeamsTable">
+              <MappingFragment StoreEntitySet="TeamsTable">
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="TeamNumber" ColumnName="TeamNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

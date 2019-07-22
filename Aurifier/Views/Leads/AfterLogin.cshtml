@@ -1,0 +1,12 @@
+﻿@model Aurifier.Models.Registration
+@{
+    ViewBag.Title = "AfterLogin";
+}
+
+<h2>After Login</h2>
+@if (Session["FirstName"] != null)
+{
+    <text>
+        Welcome @Session["FirstName"].ToString()
+    </text>
+}

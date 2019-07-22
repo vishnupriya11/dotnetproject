@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AuriferLeadsModelStoreContainer" CdmEntityContainer="AuriferLeadsEntities1">
+    <EntitySetMapping Name="AdminLogins">
+      <EntityTypeMapping TypeName="AuriferLeadsModel.AdminLogin">
+        <MappingFragment StoreEntitySet="AdminLogin">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LeadsTables">
+      <EntityTypeMapping TypeName="AuriferLeadsModel.LeadsTable">
+        <MappingFragment StoreEntitySet="LeadsTable">
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+          <ScalarProperty Name="GeneratedBy" ColumnName="GeneratedBy" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="Mail_Id" ColumnName="Mail_Id" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="Lead_Id" ColumnName="Lead_Id" />
+          <ScalarProperty Name="LeadName" ColumnName="LeadName" />
+          <ScalarProperty Name="Team_Id" ColumnName="Team_Id" />
+          <ScalarProperty Name="RolesId" ColumnName="RolesId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Descreption" ColumnName="Descreption" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Registrations">
+      <EntityTypeMapping TypeName="AuriferLeadsModel.Registration">
+        <MappingFragment StoreEntitySet="Registration">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+          <ScalarProperty Name="Roles_Id" ColumnName="Roles_Id" />
+          <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="AuriferLeadsModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="Roles_Id" ColumnName="Roles_Id" />
+          <ScalarProperty Name="Roles_Name" ColumnName="Roles_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TeamsTables">
+      <EntityTypeMapping TypeName="AuriferLeadsModel.TeamsTable">
+        <MappingFragment StoreEntitySet="TeamsTable">
+          <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+          <ScalarProperty Name="TeamNumber" ColumnName="TeamNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

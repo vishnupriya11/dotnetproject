@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9be89c9c47f3451d9afe8b46b895b738" Name="Diagram1">
+        <EntityTypeShape EntityType="AuriferLeadsModel.AdminLogin" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuriferLeadsModel.LeadsTable" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuriferLeadsModel.Registration" Width="1.5" PointX="6" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuriferLeadsModel.Role" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuriferLeadsModel.TeamsTable" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="AuriferLeadsModel.FK_LeadsTable_EmployeeId_Registration_EmployeeId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuriferLeadsModel.FK_LeadsTable_RolesId_Roles_Roles_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="AuriferLeadsModel.FK_LeadsTable_Team_Id_TeamsTable_TeamId" ManuallyRouted="false" />
+        <AssociationConnector Association="AuriferLeadsModel.FK_Registration_Roles_Id_Roles_Roles_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="AuriferLeadsModel.FK_Registration_TeamId_TeamsTable_TeamId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

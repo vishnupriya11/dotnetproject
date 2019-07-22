@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "AssociatePage";
+}
+
+<h2>AssociatePage</h2>
+@if (Session["UserName"] != null)
+{
+    <text>
+        Welcome @Session["UserName"].ToString()
+    </text>
+}
+

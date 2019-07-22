@@ -1,0 +1,79 @@
+﻿@model Aurifier.Models.Registration
+@{
+    ViewBag.Title = "Login";
+}
+<head>
+</head>
+<link rel="stylesheet" type="text/css" href="~/Scripts/bootstrap.js" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+<div class="container">
+    <div class="col-sm-10" style="width:600px;margin-left:250px;margin-top:50px;">
+        <div class="jumbotron" >
+            <div class="form-group" style="margin-top:-50px;">
+                <h1 style="margin-left:150px">Login</h1>
+            </div>
+            <hr />
+                
+                    
+                        @using (Html.BeginForm("Login","Leads",FormMethod.Post))
+                        {
+                            //this  is for create form tag
+                            @Html.AntiForgeryToken() // this is for prevent CSRF attack
+                            @Html.ValidationSummary(true)
+                            @*if (@ViewBag.Message != null)
+                                {
+                                    <div style="border: 1px solid red">
+                                        @ViewBag.Message
+                                    </div>
+                                }*@
+                            <div class="form-group input-group" >
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-user"> 
+                                    </span> 
+                                </span>
+                                @Html.TextBoxFor(Model => Model.Email,new { @id="Email",@class="form-control",@placeHolder="Enter Email", @width="300px"})
+                                @Html.ValidationMessageFor(a => a.Email)
+                            </div>
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                </span>
+                               @Html.PasswordFor(Model => Model.Password, new { @id = "Pass", @class = "form-control", @placeHolder = "Enter Password" })
+                                @Html.ValidationMessageFor(a => a.Password)
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-0.5 col-md-10">
+                                    <input type="submit" value="Login" class="btn btn-primary"  />
+
+
+                                    @Html.ActionLink("Forgot Password", "Forgot", "Leads")
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <span class="text-danger">@ViewBag.Message</span>
+                                </div>
+                            </div>
+
+
+                         }
+                    
+               
+           
+        </div>
+        </div>
+</div>
+
+
+
+@* This below line is for create javascript section *@
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+
